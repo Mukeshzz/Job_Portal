@@ -7,7 +7,7 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 const register = async (req, res) => {
   try {
     const { fullName, email, phoneNo, password, role } = req.body;
-    if (!fullName || !email || !phoneNo || !password || !role) {
+    if (!fullName || !email || !phoneNo || !password || !role ) {
       throw new ApiError(400, "Something is missing");
     }
 
