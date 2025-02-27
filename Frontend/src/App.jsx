@@ -3,9 +3,10 @@ import "./App.css";
 import { Button } from "./components/ui/button";
 import Navbar from "./components/ui/shared/Navbar";
 import { RouterProvider } from "react-router";
-import Login from "./components/Login";
-import Signup from "./components/Signup";
+
 import Home from "./components/Home";
+import Login from "./components/auth/Login";
+import Signup from "./components/auth/Signup";
 
 const router = createBrowserRouter([
   {

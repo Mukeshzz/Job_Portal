@@ -7,8 +7,12 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 const register = async (req, res) => {
   try {
     const { fullName, email, phoneNo, password, role } = req.body;
-    if (!fullName || !email || !phoneNo || !password || !role ) {
-      throw new ApiError(400, "Something is missing");
+    if (!fullName || !email || !phoneNo || !password || !role) {
+      // throw new ApiError(400, "Something is missing");
+       return res.status(400).json({
+                message: "Something is missing",
+                success: false
+            });
     }
 
     const existedUser = await User.findOne({ email });
