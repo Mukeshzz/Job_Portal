@@ -7,7 +7,7 @@ const router = Router();
 
 router.route('/register').post(upload,register)
 router.route('/login').post(login)
-router.route('/updateProfile').post(auth,update)
+router.route('/profile/update').post(auth,upload,update)
 router.route('/logout').get(logout)
 
 

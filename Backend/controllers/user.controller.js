@@ -9,10 +9,10 @@ const register = async (req, res) => {
     const { fullName, email, phoneNo, password, role } = req.body;
     if (!fullName || !email || !phoneNo || !password || !role) {
       // throw new ApiError(400, "Something is missing");
-       return res.status(400).json({
-                message: "Something is missing",
-                success: false
-            });
+      return res.status(400).json({
+        message: "Something is missing",
+        success: false,
+      });
     }
 
     const existedUser = await User.findOne({ email });
@@ -43,9 +43,7 @@ const register = async (req, res) => {
 const login = async (req, res) => {
   try {
     const { email, password, role } = req.body;
-    console.log(email);
-    console.log(password);
-    console.log(role);
+
     if (!email || !password || !role) {
       return res.status(400).json({
         message: "Something is missing",
@@ -53,7 +51,6 @@ const login = async (req, res) => {
       });
     }
     let user = await User.findOne({ email });
-    console.log(user);
 
     if (!user) {
       return res.status(404).json({
@@ -122,23 +119,29 @@ const logout = async (req, res) => {
 const update = async (req, res) => {
   try {
     const { fullName, email, phoneNo, bio, skills } = req.body;
-    if (!fullName || !email || !phoneNo || !bio || !skills) {
-      return res.status(400).json({
-        message: "Something is missing",
-        success: false,
-      });
+    console.log(phoneNo)
+    const file = req.file;
+
+    let skillsArray;
+    if (skills) {
+      skillsArray = skills.split(",");
     }
 
-    const skillsArray = skills.split(",");
     const userId = req.id; //Middleware
 
     let user = await User.findById(userId);
+    if (!user) {
+      return res
+        .status(400)
+        .json({ message: "User not found", success: false });
+    }
 
-    (user.fullName = fullName),
-      (user.email = email),
-      (user.phoneNo = phoneNo),
-      (user.profile.bio = bio),
-      (user.profile.skills = skillsArray);
+    if (fullName) user.fullName = fullName;
+    if (email) user.email = email;
+
+    if (phoneNo) user.phoneNo = phoneNo;
+    if (bio) user.profile.bio = bio;
+    if (skills) user.profile.skills = skillsArray;
 
     await user.save();
 
