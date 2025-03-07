@@ -29,6 +29,7 @@ app.use(cookieParser());
 import userRouter from "./routes/user.route.js";
 import companyRoute from "./routes/company.route.js"
 import jobsRoute from "./routes/job.route.js"
+import applicationRoute from './routes/application.route.js'
 
 
 //routes declaration
@@ -36,5 +37,6 @@ app.use("/api/v1/users", userRouter);
 
 app.use("/api/v1/company", companyRoute);
 app.use("/api/v1/job", jobsRoute);
+app.use("/api/v1/application", applicationRoute )
 
 export { app };

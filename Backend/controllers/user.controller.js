@@ -85,7 +85,7 @@ const login = async (req, res) => {
       _id: user._id,
       fullName: user.fullName,
       email: user.email,
-      phoneNumber: user.phoneNumber,
+      phoneNo: user.phoneNo,
       role: user.role,
       profile: user.profile,
     };
@@ -120,6 +120,7 @@ const update = async (req, res) => {
   try {
     const { fullName, email, phoneNo, bio, skills } = req.body;
     console.log(phoneNo)
+    console.log(fullName)
     const file = req.file;
 
     let skillsArray;

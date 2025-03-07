@@ -16,6 +16,7 @@ const Login = () => {
   const [input, setInput] = useState({
     email: "",
     password: "",
+    role:""
   });
 
   const { loading } = useSelector((store) => store.auth);
@@ -44,7 +45,7 @@ const Login = () => {
       }
     } catch (error) {
       console.log(error);
-      toast.error(error.data.message);
+      toast.error(error.response.data.message);
     } finally {
       dispatch(setLoading(false));
     }
