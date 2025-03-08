@@ -3,6 +3,8 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
+import getDataUri from "../utils/datauri.js";
+import cloudinary from "../utils/cloudinary.js";
 
 const register = async (req, res) => {
   try {
@@ -119,9 +121,14 @@ const logout = async (req, res) => {
 const update = async (req, res) => {
   try {
     const { fullName, email, phoneNo, bio, skills } = req.body;
-    console.log(phoneNo)
-    console.log(fullName)
+
+    //cloudinary
     const file = req.file;
+    console.log(file);
+
+    const fileUri = getDataUri(file);
+
+    const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
 
     let skillsArray;
     if (skills) {
@@ -144,6 +151,11 @@ const update = async (req, res) => {
     if (bio) user.profile.bio = bio;
     if (skills) user.profile.skills = skillsArray;
 
+    if (cloudResponse) {
+      user.profile.resume = cloudResponse.secure_url; //save cloudinary url
+      user.profile.resumeOriginalName = file.originalname; //Save the original file name
+    }
+
     await user.save();
 
     user = {
@@ -157,6 +169,7 @@ const update = async (req, res) => {
 
     return res.status(200).json({
       message: "Profile Updated Successfully",
+      user,
       success: true,
     });
   } catch (error) {

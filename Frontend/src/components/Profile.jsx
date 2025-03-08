@@ -7,13 +7,16 @@ import { Badge } from "./ui/badge";
 import { Label } from "./ui/label";
 import AppliedJobTable from "./AppliedJobTable";
 import UpdateProfileDialog from "./UpdateProfileDialog";
+import { useSelector } from "react-redux";
 
-const skills = ["HTML", "Css", "Javascript", "Reactjs"];
+
 const isResume = true;
 
 const Profile = () => {
+  const [open, setOpen] = useState(false);
+  const { user } = useSelector((store) => store.auth);
 
-  const [open, setOpen] = useState(false)
+
 
   return (
     <div>
@@ -25,11 +28,8 @@ const Profile = () => {
               <AvatarImage src="" />
             </Avatar>
             <div>
-              <h1 className="font-medium text-xl">Full Name</h1>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio
-                voluptas odit officia.
-              </p>
+              <h1 className="font-medium text-xl">{user?.fullName}</h1>
+              <p>{user?.profile?.bio}</p>
             </div>
           </div>
           <Button onClick={() => setOpen(true)}>
@@ -39,18 +39,20 @@ const Profile = () => {
         <div className="my-5">
           <div className="flex items-center gap-3 my-2">
             <Mail />
-            <span>rocky@hotmail.com</span>
+            <span>{user?.email}</span>
           </div>
           <div className="flex items-center gap-3 my-2">
             <Contact />
-            <span>886677550287</span>
+            <span>{user?.phoneNo}</span>
           </div>
         </div>
         <div className="my-5">
           <h1>Skills</h1>
           <div className="flex items-center gap-1">
-            {skills.length !== 0 ? (
-              skills.map((skill, index) => <Badge key={index}>{skill}</Badge>)
+            {user?.profile?.skills !== 0 ? (
+              user?.profile?.skills.map((skill, index) => (
+                <Badge key={index}>{skill}</Badge>
+              ))
             ) : (
               <span>Na</span>
             )}
@@ -61,10 +63,10 @@ const Profile = () => {
           {isResume ? (
             <a
               target="black"
-              href=""
+              href={user?.profile?.resume}
               className="blue-500 w-full hover:underline cursor-pointer"
             >
-              Rocky
+              {user?.profile?.resumeOriginalName}
             </a>
           ) : (
             <span>NA</span>
@@ -75,7 +77,7 @@ const Profile = () => {
         <h1 className="font-bold text-lg">Applied Jobs</h1>
         <AppliedJobTable />
       </div>
-      <UpdateProfileDialog open={open} setOpen={setOpen}/>
+      <UpdateProfileDialog open={open} setOpen={setOpen} />
     </div>
   );
 };

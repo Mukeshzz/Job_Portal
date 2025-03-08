@@ -19,12 +19,12 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
   
 
   const [input, setInput] = useState({
-    fullName: user?.fullName,
-    email: user?.email,
-    phoneNo: user?.phoneNo,
-    bio: user?.profile?.bio,
-    skills: user?.profile?.skills?.map((skill) => skill),
-    file: user?.profile?.name,
+    fullName: user?.fullName || "",
+    email: user?.email || "",
+    phoneNo: user?.phoneNo || "",
+    bio: user?.profile?.bio || "",
+    skills: user?.profile?.skills?.map((skill) => skill) || "",
+    file: user?.profile?.resume || "",
   });
   console.log(input);
 
@@ -51,7 +51,7 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
       formData.append("file", input.file);
     }
     try {
-      // setLoading(true);
+      setLoading(true);
       const res = await axios.post(
         `${USER_API_END_POINT}/profile/update`,
         formData,
@@ -63,12 +63,16 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
         }
       );
       if (res.data.success) {
+        console.log(res.data.user)
         dispatch(setUser(res.data.user));
         toast.success(res.data.message);
       }
     } catch (error) {
       console.log(error);
-      // toast.error(error.response.data.message);
+      toast.error(error.response.data.message);
+    }
+    finally{
+      setLoading(false)
     }
     setOpen(false);
     console.log(input);
