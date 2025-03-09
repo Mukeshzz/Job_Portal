@@ -66,7 +66,7 @@ const Profile = () => {
               href={user?.profile?.resume}
               className="blue-500 w-full hover:underline cursor-pointer"
             >
-              {user?.profile?.resumeOriginalName}
+              {user?.profile?.resumeOriginal}
             </a>
           ) : (
             <span>NA</span>

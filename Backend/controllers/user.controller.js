@@ -17,6 +17,11 @@ const register = async (req, res) => {
       });
     }
 
+    const file = req.file;
+    const fileUri = getDataUri(file);
+    const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+
+
     const existedUser = await User.findOne({ email });
     console.log(existedUser);
     if (existedUser) {
@@ -30,6 +35,9 @@ const register = async (req, res) => {
       phoneNo,
       password: hashedPassword,
       role,
+      profile: {
+        profilePhoto:cloudResponse.secure_url,
+      }
     });
 
     const createdUser = await User.findById(user._id).select("-password");
@@ -124,7 +132,7 @@ const update = async (req, res) => {
 
     //cloudinary
     const file = req.file;
-    console.log(file);
+    
 
     const fileUri = getDataUri(file);
 
@@ -153,7 +161,7 @@ const update = async (req, res) => {
 
     if (cloudResponse) {
       user.profile.resume = cloudResponse.secure_url; //save cloudinary url
-      user.profile.resumeOriginalName = file.originalname; //Save the original file name
+      user.profile.resumeOriginal = file.originalname; //Save the original file name
     }
 
     await user.save();
