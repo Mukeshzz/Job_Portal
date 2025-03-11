@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import "./App.css";
-import { Button } from "./components/ui/button";
-import Navbar from "./components/ui/shared/Navbar";
+
 import { RouterProvider } from "react-router";
 
 import Home from "./components/Home";
@@ -10,7 +9,7 @@ import Signup from "./components/auth/Signup";
 import Jobs from "./components/Jobs";
 import Browse from "./components/Browse";
 import Profile from "./components/Profile";
-import JobDescription from "./JobDescription";
+import JobDescription from "./components/JobDescription";
 
 const router = createBrowserRouter([
   {
@@ -22,25 +21,25 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   {
-    path : "signup",
-    element: <Signup />
+    path: "signup",
+    element: <Signup />,
   },
   {
-    path:"/jobs",
-    element: <Jobs />
+    path: "/jobs",
+    element: <Jobs />,
   },
   {
-    path:"/description/:id",
-    element: <JobDescription />
+    path: "/description/:id",
+    element: <JobDescription />,
   },
   {
     path: "/browse",
-    element: <Browse />
+    element: <Browse />,
   },
   {
     path: "/profile",
-    element: <Profile />
-  }
+    element: <Profile />,
+  },
 ]);
 
 function App() {

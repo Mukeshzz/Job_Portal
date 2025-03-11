@@ -6,6 +6,9 @@ import { LogOut, User2 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
+import axios from "axios";
+import { USER_API_END_POINT } from "@/utils/constants";
+import { setUser } from "@/redux/authSlice";
 
 const Navbar = () => {
   const { user } = useSelector((state) => state.auth);
