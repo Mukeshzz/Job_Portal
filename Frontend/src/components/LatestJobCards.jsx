@@ -1,7 +1,9 @@
 import React from "react";
 import { Badge } from "./ui/badge";
+import { useNavigate } from "react-router-dom";
 
 const LatestJobCards = ({job}) => {
+  const navigate = useNavigate()
   return (
     <div className="p-5 rounded-md shadow-xl bg-white border-gray-100 cursor-pointer">
       <div>

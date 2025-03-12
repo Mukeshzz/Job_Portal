@@ -10,10 +10,22 @@ export const postJob = async (req, res) => {
       salary,
       location,
       jobType,
-      exprience,
+      experience,
       position,
       companyId,
     } = req.body;
+    console.log(
+      title,
+      description,
+      requirements,
+      salary,
+      location,
+      jobType,
+      experience,
+      position,
+      companyId
+    );
+
     const userId = req.id;
     if (
       !title ||
@@ -22,7 +34,7 @@ export const postJob = async (req, res) => {
       !salary ||
       !location ||
       !jobType ||
-      !exprience ||
+      !experience ||
       !position ||
       !companyId
     ) {
@@ -39,7 +51,7 @@ export const postJob = async (req, res) => {
       salary: Number(salary),
       location,
       jobType,
-      exprienceLevel: exprience,
+      exprienceLevel: experience,
       position,
       company: companyId,
       createdBy: userId,
@@ -93,7 +105,7 @@ export const getJobById = async (req, res) => {
   try {
     const jobId = req.params.id;
     const job = await Jobs.findById(jobId).populate({
-      path:"applications"
+      path: "applications",
     });
     if (!job) {
       return res.status(404).json({
@@ -114,7 +126,10 @@ export const getJobById = async (req, res) => {
 export const getAdminJobs = async (req, res) => {
   try {
     const adminId = req.id;
-    const jobs = await Jobs.find({ createdBy: adminId });
+    const jobs = await Jobs.find({ createdBy: adminId }).populate({
+      path: "company",
+      createdAt: -1,
+    });
 
     if (!jobs) {
       return res.status(404).json({

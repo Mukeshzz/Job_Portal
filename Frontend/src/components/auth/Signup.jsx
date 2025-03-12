@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -65,6 +65,12 @@ const Signup = () => {
       dispatch(setLoading(false));
     }
   };
+
+  useEffect(()=>{
+    if(user){
+        navigate("/");
+    }
+},[])
   
 
   return (
