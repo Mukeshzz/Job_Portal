@@ -7,6 +7,8 @@ import {motion} from "motion/react"
 
 const Jobs = () => {
   const { allJobs, searchQuery } = useSelector((store) => store.job);
+  console.log(allJobs);
+  
   const [filterJobs, setFilterJobs] = useState(allJobs);
 
   useEffect(() => {
@@ -21,6 +23,9 @@ const Jobs = () => {
 
   },[allJobs,searchQuery])
 
+  
+  
+
   return (
     <div>
       <Navbar />
@@ -30,12 +35,12 @@ const Jobs = () => {
             <FilterCard />
           </div>
 
-          {filterJobs.length < 0 ? (
+          {filterJobs.length <=0 ? (
             <span>Job not found</span>
           ) : (
             <div className="flex-1 h-[88vh] overflow-y-auto pb-5">
               <div className="grid grid-cols-3 gap-4">
-                {allJobs.map((job) => (
+                {filterJobs.map((job) => (
                   <motion.div
                   initial={{opacity:0, x:100}}
                   animate={{opacity:1, x:0}}

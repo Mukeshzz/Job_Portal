@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { Label } from "./ui/label";
 import { useDispatch } from "react-redux";
+import { setSearchedQuery } from "@/redux/jobSlice";
 
 const filter = [
   {
@@ -36,7 +37,7 @@ const FilterCard = () => {
         {filter.map((data, index) => (
           <div>
             <h1 className="font-bold text-lg">{data.filterType}</h1>
-            {data.array.map((item, index) => {
+            {data.array.map((item, idx) => {
               const itemId = `id${index}-${idx}`
               return (
                 <div className="flex items-center space-x-2 my-2">

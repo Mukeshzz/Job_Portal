@@ -3,6 +3,7 @@ import Navbar from "./ui/shared/Navbar";
 import Job from "./Job";
 import { useDispatch, useSelector } from "react-redux";
 import useGetAllJobs from "@/hooks/useGetAllJobs";
+import { setSearchedQuery } from "@/redux/jobSlice";
 
 
 
@@ -13,7 +14,7 @@ const Browse = () => {
 
   useEffect(() => {
     return () => {
-      dispatch(setSearchQuery(""))
+      dispatch(setSearchedQuery(""))
     }
   },[])
   return (
@@ -24,7 +25,7 @@ const Browse = () => {
         <div className="grid grid-cols-3 gap-4">
           {allJobs.map((job) => {
             return( 
-            <Job key={job_id} job={job}/>
+            <Job key={job._id} job={job}/>
           );
           })}
         </div>

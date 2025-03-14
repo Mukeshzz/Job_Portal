@@ -20,13 +20,11 @@ const HeroSection = () => {
       <div className="flex flex-col gap-5 my-10">
         <span className="font-medium">No. 1 Job Hunt Website</span>
         <h1 className="text-5xl ">
-          Search, Apply & <br />
-          Get Your <span>Dream Jobs</span>
+          Find The Most<br />
+          Exciting <span>Startup Jobs</span>
         </h1>
         <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus
-          quidem cupiditate commodi, recusandae, dolor modi eum iusto, in libero
-          aliquid illum nostrum quaerat!
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Distinctio unde blanditiis quisquam molestias excepturi quod exercitationem minus quo optio ullam.
         </p>
         <div className="flex w-[40%] shadow-lg border border-gray-200 items-center mx-auto gap-4 rounded-lg pl-3">
           <input

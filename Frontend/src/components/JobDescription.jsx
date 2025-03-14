@@ -5,7 +5,10 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setSingleJob } from "@/redux/jobSlice";
-import { APPLICATION_API_END_POINT, JOB_API_END_POINT } from "@/utils/constants";
+import {
+  APPLICATION_API_END_POINT,
+  JOB_API_END_POINT,
+} from "@/utils/constants";
 import { toast } from "sonner";
 
 const JobDescription = () => {
@@ -14,14 +17,12 @@ const JobDescription = () => {
   const { user } = useSelector((store) => store.auth);
   const isInitiallyApplied =
     singleJob?.applications?.some(
-      (application) => application.applicant == user?._id
+      (application) => application.applicant === user?._id
     ) || false;
   const [isApplied, setIsApplied] = useState(isInitiallyApplied);
 
   const params = useParams();
   const jobId = params.id;
-
-  
 
   const applyJobHandler = async () => {
     try {
@@ -32,11 +33,14 @@ const JobDescription = () => {
         }
       );
       console.log(res.data.success);
-      
+
       if (res.data.success) {
-        setIsApplied(true) //update local state
-        const updateSingleJob = {...singleJob, applications:[...singleJob.applications, {applicant: user?._id}]}
-        dispatch(setSingleJob(updateSingleJob)) //help to update in real time
+        setIsApplied(true); //update local state
+        const updatedSingleJob = {
+          ...singleJob,
+          applications: [...singleJob.applications, { applicant: user?._id }],
+        };
+        dispatch(setSingleJob(updatedSingleJob)); //help to update in real time
         toast.success(res.data.message);
       }
     } catch (error) {
@@ -51,12 +55,14 @@ const JobDescription = () => {
         const res = await axios.get(`${JOB_API_END_POINT}/get/${jobId}`, {
           withCredentials: true,
         });
-        
-        
 
         if (res.data.success) {
           dispatch(setSingleJob(res.data.job));
-          setIsApplied(res.data.job.applications.some(application=>application.applicant==user?._id)) //Ensure the state is in sync with fetched data
+          setIsApplied(
+            res.data.job.applications.some(
+              (application) => application.applicant == user?._id
+            )
+          ); //Ensure the state is in sync with fetched data
         }
       } catch (error) {
         console.log(error);
@@ -119,7 +125,7 @@ const JobDescription = () => {
         <h1 className="font-bold my-1">
           Exprience:
           <span className="pl-4 font-normal text-gray-800">
-            {singleJob?.exprience} years
+            {singleJob?.exprienceLevel} years
           </span>
         </h1>
         <h1 className="font-bold my-1">

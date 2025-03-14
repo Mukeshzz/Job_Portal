@@ -12,7 +12,6 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { MoreHorizontal } from "lucide-react";
 import { useSelector } from "react-redux";
 import { toast } from "sonner";
-
 import axios from "axios";
 import { APPLICATION_API_END_POINT } from "@/utils/constants";
 
@@ -56,9 +55,9 @@ const ApplicantsTable = () => {
           {applicants &&
             applicants?.applications?.map((item) => (
               <tr key={item._id}>
-                <TableCell>{item?.applicant?.fullname}</TableCell>
+                <TableCell>{item?.applicant?.fullName}</TableCell>
                 <TableCell>{item?.applicant?.email}</TableCell>
-                <TableCell>{item?.applicant?.phoneNumber}</TableCell>
+                <TableCell>{item?.applicant?.phoneNo}</TableCell>
                 <TableCell>
                   {item.applicant?.profile?.resume ? (
                     <a

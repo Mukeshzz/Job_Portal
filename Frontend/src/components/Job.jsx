@@ -15,6 +15,9 @@ const Job = ({job}) => {
     const timeDiff = currentTime - createdAt;
     return Math.floor(timeDiff/(1000*24*60*60));
   }
+
+  console.log("job",job);
+  
   
 
   return (
@@ -28,7 +31,7 @@ const Job = ({job}) => {
       <div className="flex items-center gap-2 my-2">
         <Button>
           <Avatar>
-            <AvatarImage src={job?.compamy?.logo} />
+            <AvatarImage src={job?.company?.logo} />
           </Avatar>
         </Button>
         <div>

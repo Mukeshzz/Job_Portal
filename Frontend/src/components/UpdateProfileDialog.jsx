@@ -1,6 +1,12 @@
 import React, { useState } from "react";
-import { Dialog, DialogContent, DialogFooter, DialogHeader } from "./ui/dialog";
-import { DialogTitle } from "@radix-ui/react-dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "./ui/dialog";
+
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
@@ -15,8 +21,6 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
   const [loading, setLoading] = useState(false);
 
   const { user } = useSelector((store) => store.auth);
-  console.log(user);
-  
 
   const [input, setInput] = useState({
     fullName: user?.fullName || "",
@@ -26,7 +30,7 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
     skills: user?.profile?.skills?.map((skill) => skill) || "",
     file: user?.profile?.resume || "",
   });
-  console.log(input);
+
 
   const dispatch = useDispatch();
 
@@ -63,16 +67,15 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
         }
       );
       if (res.data.success) {
-        console.log(res.data.user)
+        
         dispatch(setUser(res.data.user));
         toast.success(res.data.message);
       }
     } catch (error) {
       console.log(error);
       toast.error(error.response.data.message);
-    }
-    finally{
-      setLoading(false)
+    } finally {
+      setLoading(false);
     }
     setOpen(false);
     console.log(input);
@@ -160,7 +163,7 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
                   id="file"
                   name="file"
                   type="file"
-                  accept="application.pdf"
+                  accept="application/pdf"
                   className="col-span-3"
                   onChange={filechangeHandler}
                 />

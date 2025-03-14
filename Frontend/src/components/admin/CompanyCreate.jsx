@@ -11,31 +11,33 @@ import { COMPANY_API_END_POINT } from "@/utils/constants";
 import { toast } from "sonner";
 
 const CompanyCreate = () => {
-  const navigate = useNavigate()
-  const [companyName, setCompanyName] = useState("")
-  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const [companyName, setCompanyName] = useState("");
+  const dispatch = useDispatch();
 
-  const registerNewCompany = async () =>{
+  const registerNewCompany = async () => {
     try {
-      const res = await axios.post(`${COMPANY_API_END_POINT}/register`, {companyName}, {
-        headers: {
-          'Content-Type':'application/json'
-        },
-        withCredentials: true
-      } )
-      if(res.data.success){
-        dispatch(setSingleCompamy(res.data.company))
+      const res = await axios.post(
+        `${COMPANY_API_END_POINT}/register`,
+        { companyName },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+      if (res.data.success) {
+        dispatch(setSingleCompamy(res.data.company));
         toast.success(res.data.message);
         const companyId = res?.data?.company?._id;
-        
-        
-        navigate(`/admin/companies/${companyId}`)
+
+        navigate(`/admin/companies/${companyId}`);
       }
     } catch (error) {
       console.log(error);
-      
     }
-  }
+  };
 
   return (
     <div>
@@ -57,7 +59,12 @@ const CompanyCreate = () => {
         />
 
         <div className="flex items-center gap-2 my-10">
-          <Button variant="outline" onClick={() => navigate("/admin/companies")}>Cancel</Button>
+          <Button
+            variant="outline"
+            onClick={() => navigate("/admin/companies")}
+          >
+            Cancel
+          </Button>
           <Button onClick={registerNewCompany}>Continue</Button>
         </div>
       </div>

@@ -31,18 +31,18 @@ const AppliedJobTable = () => {
           ) : (
             allAppliedJobs.map((appliedJob) => (
               <TableRow key={appliedJob._id}>
-                <TableCell>{appliedJob?.createdAt.split("T")[0]}</TableCell>
+                <TableCell>{appliedJob?.createdAt?.split("T")[0]}</TableCell>
                 <TableCell>{appliedJob?.job?.title}</TableCell>
                 <TableCell>{appliedJob?.job?.company?.name}</TableCell>
                 <TableCell className="text-right">
-                  <Badge>
-                    {`${
+                  <Badge className={`${
                       appliedJob?.status === "rejected"
                         ? "bg-red-400"
                         : appliedJob.status === "pending"
                         ? "bg-gray-400"
                         : "bg-green-400"
-                    }`}
+                    }`}>
+                    
                     {appliedJob.status.toUpperCase()}
                   </Badge>
                 </TableCell>

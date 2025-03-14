@@ -14,9 +14,9 @@ import { Edit2, Eye, MoreHorizontal } from "lucide-react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+
 const AdminJobTable = () => {
- 
-  const { allAdminJobs, searcJobByText } = useSelector((store) => store.job);
+  const { allAdminJobs, searchJobByText } = useSelector((store) => store.job);
 
   const [filterJobs, setFilterJobs] = useState(allAdminJobs);
 
@@ -24,17 +24,19 @@ const AdminJobTable = () => {
 
   useEffect(() => {
     const filteredJobs =
-      allAdminJobs.length >= 0 &&
       allAdminJobs.filter((job) => {
-        if (!searcJobByText) {
+        if (!searchJobByText) {
           return true;
         }
-        return job?.title
-          ?.toLowerCase()
-          .includes(searcJobByText.toLowerCase()) || job?.company?.name.toLowerCase().includes(searcJobByText.toLowerCase());
+        return (
+          job?.title?.toLowerCase().includes(searcJobByText.toLowerCase()) ||
+          job?.company?.name
+            .toLowerCase()
+            .includes(searcJobByText.toLowerCase())
+        );
       });
     setFilterJobs(filteredJobs);
-  }, [allAdminJobs, searcJobByText]);
+  }, [allAdminJobs, searchJobByText]);
 
   return (
     <div>
@@ -49,7 +51,7 @@ const AdminJobTable = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {filterJobs.map((job) => {
+          {filterJobs?.map((job) => {
             return (
               <tr>
                 <TableCell>{job?.company?.name}</TableCell>
@@ -68,8 +70,13 @@ const AdminJobTable = () => {
                         <Edit2 className="w-4" />
                         <span>Edit</span>
                       </div>
-                      <div onClick={() => navigate(`/admin/jobs/${job._id}/applicants`)} className="flex items-center w-fit gap-2 cursor-pointer mt-2">
-                        <Eye className="w-4"/>
+                      <div
+                        onClick={() =>
+                          navigate(`/admin/jobs/${job._id}/applicants`)
+                        }
+                        className="flex items-center w-fit gap-2 cursor-pointer mt-2"
+                      >
+                        <Eye className="w-4" />
                         <span>Applicants</span>
                       </div>
                     </PopoverContent>

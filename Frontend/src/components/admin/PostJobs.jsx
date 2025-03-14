@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "../ui/shared/Navbar";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import {
@@ -17,6 +17,7 @@ import { toast } from "sonner";
 import axios from "axios";
 import { JOB_API_END_POINT } from "@/utils/constants";
 import { Loader2 } from "lucide-react";
+import { setAllJobs } from "@/redux/jobSlice";
 
 const companyArray = [];
 
@@ -35,6 +36,7 @@ const PostJobs = () => {
 
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const { companies } = useSelector((store) => store.company);
   const changeEventHandler = (e) => {
@@ -52,8 +54,6 @@ const PostJobs = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      console.log(input);
-      
 
       const res = await axios.post(`${JOB_API_END_POINT}/post`, input, {
         headers: {
@@ -64,9 +64,12 @@ const PostJobs = () => {
 
       if (res.data.success) {
         toast.success(res.data.message);
+
         navigate("/admin/jobs");
       }
     } catch (error) {
+      console.log("error", error);
+
       toast.error(error.response.data.message);
     } finally {
       setLoading(false);

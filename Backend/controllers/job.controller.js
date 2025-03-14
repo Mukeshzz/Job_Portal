@@ -14,19 +14,9 @@ export const postJob = async (req, res) => {
       position,
       companyId,
     } = req.body;
-    console.log(
-      title,
-      description,
-      requirements,
-      salary,
-      location,
-      jobType,
-      experience,
-      position,
-      companyId
-    );
 
     const userId = req.id;
+
     if (
       !title ||
       !description ||
@@ -73,10 +63,10 @@ export const getAllJobs = async (req, res) => {
     const query = {
       $or: [
         {
-          title: { $regex: keyword, $options: "i" },
+          title: { $regex: keyword, $options: "i" }
         },
         {
-          description: { $regex: keyword, $options: "i" },
+          description: { $regex: keyword, $options: "i" }
         },
       ],
     };

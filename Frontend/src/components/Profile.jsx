@@ -31,7 +31,7 @@ const Profile = () => {
               <p>{user?.profile?.bio}</p>
             </div>
           </div>
-          <Button onClick={() => setOpen(true)}>
+          <Button onClick={() => setOpen(true)} className="text-right" variant="outline">
             <Pen />
           </Button>
         </div>
@@ -53,7 +53,7 @@ const Profile = () => {
                 <Badge key={index}>{skill}</Badge>
               ))
             ) : (
-              <span>Na</span>
+              <span>NA</span>
             )}
           </div>
         </div>
@@ -61,9 +61,9 @@ const Profile = () => {
           <Label className="text-md font-bold">Resume</Label>
           {isResume ? (
             <a
-              target="black"
+              target="blank"
               href={user?.profile?.resume}
-              className="blue-500 w-full hover:underline cursor-pointer"
+              className="text-blue-500 w-full hover:underline cursor-pointer"
             >
               {user?.profile?.resumeOriginal}
             </a>

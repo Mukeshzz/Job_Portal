@@ -4,8 +4,6 @@ import jobSlice from "./jobSlice";
 import companySlice from "./companySlice"
 import applicationSlice from "./applicationSlice";
 
-
-
 import {
   persistStore,
   persistReducer,
