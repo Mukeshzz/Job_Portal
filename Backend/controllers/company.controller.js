@@ -6,7 +6,7 @@ import getDataUri from "../utils/datauri.js";
 export const registerCompany = async (req,res) => {
   try {
     const { companyName } = req.body;
-    console.log("Company Name",companyName);
+   
     
     if (!companyName) {
       return res

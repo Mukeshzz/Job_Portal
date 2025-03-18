@@ -16,7 +16,7 @@ const Job = ({job}) => {
     return Math.floor(timeDiff/(1000*24*60*60));
   }
 
-  console.log("job",job);
+  
   
   
 

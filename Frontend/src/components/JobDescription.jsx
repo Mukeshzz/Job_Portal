@@ -32,7 +32,6 @@ const JobDescription = () => {
           withCredentials: true,
         }
       );
-      console.log(res.data.success);
 
       if (res.data.success) {
         setIsApplied(true); //update local state

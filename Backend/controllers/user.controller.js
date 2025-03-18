@@ -23,7 +23,7 @@ const register = async (req, res) => {
 
 
     const existedUser = await User.findOne({ email });
-    console.log(existedUser);
+    
     if (existedUser) {
       throw new ApiError(409, "User already exist with this email");
     }
