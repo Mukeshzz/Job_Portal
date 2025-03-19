@@ -5,20 +5,12 @@ import cors from "cors";
 const app = express();
 
 app.use(
-  cors({
-    origin: true,
-    optionsSuccessStatus: 200,
-    credentials: true,
-  })
-);
-
-app.options(
-  "*",
-  cors({
-    origin: true,
-    optionsSuccessStatus: 200,
-    credentials: true,
-  })
+    cors({
+        origin: process.env.FRONTEND_URL, // Allow frontend URL
+        credentials: true, // Allow sending cookies
+        methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
+        allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+    })
 );
 
 app.use(express.json({ limit: "16kb" }));
