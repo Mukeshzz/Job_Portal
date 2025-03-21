@@ -6,7 +6,7 @@ const app = express();
 
 app.use(
     cors({
-        origin: 'http://localhost:5173', // Allow frontend URL
+        origin: 'https://job-portal-sigma-sand.vercel.app/', // Allow frontend URL
         credentials: true, // Allow sending cookies
     })
 );
