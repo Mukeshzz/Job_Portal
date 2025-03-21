@@ -50,9 +50,9 @@ const CompaniesTable = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {filterCompany.map((company) => {
+          {filterCompany.map((company, index) => {
             return (
-              <tr>
+              <tr key={index}>
                 <TableCell>
                   <Avatar>
                     <AvatarImage src={company.logo} />

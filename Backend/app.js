@@ -6,10 +6,8 @@ const app = express();
 
 app.use(
     cors({
-        origin: process.env.FRONTEND_URL, // Allow frontend URL
+        origin: 'http://localhost:5173', // Allow frontend URL
         credentials: true, // Allow sending cookies
-        methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
-        allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
     })
 );
 

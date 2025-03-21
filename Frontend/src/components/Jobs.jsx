@@ -7,7 +7,7 @@ import {motion} from "motion/react"
 
 const Jobs = () => {
   const { allJobs, searchQuery } = useSelector((store) => store.job);
-  console.log(allJobs);
+  
   
   const [filterJobs, setFilterJobs] = useState(allJobs);
 

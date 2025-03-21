@@ -59,7 +59,6 @@ const Signup = () => {
         toast.success(res.data.message);
       }
     } catch (error) {
-      console.log("Error:", error.response?.data || error.message);
       toast.error(error.response?.data?.message);
     } finally {
       dispatch(setLoading(false));
