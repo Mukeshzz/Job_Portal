@@ -17,25 +17,28 @@ const HeroSection = () => {
 
   return (
     <div className="text-center">
-      <div className="flex flex-col gap-5 my-10">
-        <span className="font-medium">No. 1 Job Hunt Website</span>
-        <h1 className="text-5xl ">
-          Find The Most<br />
-          Exciting <span>Startup Jobs</span>
-        </h1>
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Distinctio unde blanditiis quisquam molestias excepturi quod exercitationem minus quo optio ullam.
-        </p>
-        <div className="flex w-[40%] shadow-lg border border-gray-200 items-center mx-auto gap-4 rounded-lg pl-3">
-          <input
-            type="text"
-            placeholder="Find Your Dream Jobs"
-            onChange={(e) => setQuery(e.target.value)}
-            className="outline-none border-none w-full"
-          />
-          <Button onClick={searchJobHandler}>
-            <Search className="h-5 w-5" />
-          </Button>
+      <div className="flex justify-center items-center my-10">
+        <div className="flex flex-col gap-10 ">
+          <div className="flex flex-col gap-3">
+            <h1 className="text-5xl font-bold text-[#2D336B]">Find Your Dream Job Today</h1>
+            <p className="text-black">
+              Connecting Talent with Opportunity: Your Gateway to Career Success
+            </p>
+          </div>
+          <div className="flex w-[40%] shadow-lg border border-gray-200 items-center mx-auto gap-4 rounded-lg pl-3">
+            <input
+              type="text"
+              placeholder="Find Your Dream Jobs"
+              onChange={(e) => setQuery(e.target.value)}
+              className="outline-none border-none w-full"
+            />
+            <Button onClick={searchJobHandler}>
+              <Search className="h-5 w-5" />
+            </Button>
+          </div>
+        </div>
+        <div>
+          <img src="./job_vacancy.jpg" alt="" className="h-[500px] w-[500px]" />
         </div>
       </div>
     </div>
